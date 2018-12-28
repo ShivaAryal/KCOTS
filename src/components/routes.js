@@ -7,19 +7,22 @@ import Transactioner from './Transactioner';
 import Stock from './Stock';
 import Expense from './Expense';
 import Drawer from './Drawer';
+import Login from './Login';
 import { Constants } from 'expo';
 const AppNavigator = createDrawerNavigator({
+    Login:{screen:Login},
     Home:{screen:Home},
     Sales:{screen:Sales},
     Transactioner:{screen:Transactioner},
     Stock:{screen:Stock},
-    Expense:{screen:Expense}
+    Expense:{screen:Expense},
+    Drawer:{screen:Drawer}
   },{
-      initialRouteName:'Home',
+      initialRouteName:'Login',
       headerMode:'none',
       drawerPosition:'left',
       drawerWidth:Dimensions.get('window').width*0.7,
-      contentComponent:Drawer
+      contentComponent:Drawer,
     //   drawerLockMode: 'locked-closed'
   });
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View,ScrollView,StyleSheet,Image,Text, Modal } from 'react-native';
+import { View,ScrollView,StyleSheet,Image,Text, Modal, AsyncStorage } from 'react-native';
 import {List,Divider,Button} from 'react-native-paper';
 class Drawer extends Component {
     constructor(props) {
@@ -14,6 +14,12 @@ class Drawer extends Component {
         this.setState({logOutVisible:true})
     }
 
+    onSignOut=()=>{
+        AsyncStorage.setItem('USERDATA','')
+        this.setState({logOutVisible:false})
+        this.props.navigation.navigate('Login')
+    }
+
     render() {
         const navigate = this.props.navigation.navigate; 
         return (
@@ -26,35 +32,35 @@ class Drawer extends Component {
                     style={styles.item}
                     title={<Text>Home</Text>}
                     left={() => <List.Icon icon="home" color="#3E2723" style={{marginLeft:0,marginRight:0}}/>}
-                    onPress={()=>navigate('Home')}
+                    onPress={()=>navigate('Home',{props:'props'})}
                 />
                 <Divider style={{marginHorizontal:10}}/>
                 <List.Item
                     style={styles.item}
                     title={<Text>Sales</Text>}
                     left={() => <List.Icon icon="attach-money" color="#4CAF50" style={{marginLeft:0,marginRight:0}}/>}
-                    onPress={()=>navigate('Sales')}
+                    onPress={()=>navigate('Sales',{props:'props'})}
                 />
                 <Divider style={{marginHorizontal:10}}/>
                 <List.Item
                     style={styles.item}
                     title={<Text>Transactioner</Text>}
                     left={() => <List.Icon icon="people" color="#000000" style={{marginLeft:0,marginRight:0}}/>}
-                    onPress={()=>navigate('Transactioner')}
+                    onPress={()=>navigate('Transactioner',{props:'props'})}
                 />
                 <Divider style={{marginHorizontal:10}}/>
                 <List.Item
                     style={styles.item}
                     title={<Text>Stock</Text>}
                     left={() => <List.Icon icon="local-grocery-store" color="#303F9F" style={{marginLeft:0,marginRight:0}}/>}
-                    onPress={()=>navigate('Stock')}
+                    onPress={()=>navigate('Stock',{props:'props'})}
                 />
                 <Divider style={{marginHorizontal:10}}/>
                 <List.Item
                     style={styles.item}
                     title={<Text>Expense</Text>}
                     left={() => <List.Icon icon="mood-bad" color="#004D40" style={{marginLeft:0,marginRight:0}}/>}
-                    onPress={()=>navigate('Expense')}
+                    onPress={()=>navigate('Expense',{props:'props'})}
                 />
                 <Divider style={{marginHorizontal:10}}/>
                 <List.Item
@@ -66,7 +72,7 @@ class Drawer extends Component {
                 <Divider style={{marginHorizontal:10}}/>
                 <Modal
                     style={{}}
-                    onRequestClose={()=>this.setState({dialogVisible:false})}
+                    onRequestClose={()=>this.setState({logOutVisible:false})}
                     transparent={true}
                     visible={this.state.logOutVisible}>
                     <View style={{backgroundColor:'rgba(0,0,0,0.8)',flex:1,justifyContent:'center'}}>
@@ -76,8 +82,8 @@ class Drawer extends Component {
                                 <Button color="#000" style={{backgroundColor:'#fff'}} onPress={()=>this.setState({logOutVisible:false})}>
                                     <Text style={{color:'#2196F3'}} >CANCEL</Text>
                                 </Button>
-                                <Button color="#000" style={{marginRight:0,backgroundColor:'#fff'}} onPress={()=>this.setState({logOutVisible:false})}>
-                                    <Text style={{color:'#2196F3'}} >LOG OUT</Text>
+                                <Button color="#000" style={{marginRight:0,backgroundColor:'#d32f2f'}} onPress={()=>this.onSignOut()}>
+                                    <Text style={{color:'#fff'}} >LOG OUT</Text>
                                 </Button>
                             </View>
                         </View>
