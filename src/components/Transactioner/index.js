@@ -6,6 +6,10 @@ import { Table, Row, Rows } from 'react-native-table-component';
 import OwnerService from './owner.services';
 import {getToken} from './../../utils';
 class Transactioner extends Component {
+    static navigationOptions = {
+        drawerLabel: () => null,
+        drawerLockMode:'unlocked'
+    }
     constructor(props) {
         super(props);
         this.state = {

@@ -7,6 +7,10 @@ import SalesService from './sales.services';
 import DatePicker from 'react-native-datepicker';
 import {getToken} from './../../utils';
 class Chamal extends Component {
+    static navigationOptions = {
+        drawerLabel: () => null,
+        drawerLockMode:'unlocked'
+    }
     constructor(props) {
         super(props);
         this.state = {

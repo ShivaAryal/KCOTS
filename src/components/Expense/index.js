@@ -7,6 +7,10 @@ import DatePicker from 'react-native-datepicker'
 import ExpenseService from './expense.services'
 import {getToken} from './../../utils'
 class Expense extends Component {
+    static navigationOptions = {
+        drawerLabel: () => null,
+        drawerLockMode:'unlocked'
+    }
     constructor(props) {
         super(props);
         this.state = {

@@ -23,7 +23,7 @@ const AppNavigator = createDrawerNavigator({
       drawerPosition:'left',
       drawerWidth:Dimensions.get('window').width*0.7,
       contentComponent:Drawer,
-    //   drawerLockMode: 'locked-closed'
+      drawerLockMode: 'locked-closed'
   });
 
   const App = createAppContainer(AppNavigator)

@@ -6,6 +6,10 @@ import HomeService from './home.services';
 import {getToken} from './../../utils';
 const months = ['hawa','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 class Home extends Component {
+    static navigationOptions = {
+        drawerLabel: () => null,
+        drawerLockMode:'unlocked'
+    }
     constructor(props) {
         super(props);
         this.state = { 
