@@ -28,10 +28,15 @@ class Login extends Component {
     }
 
     onLoginPress(){
+        this.setState({loading:true})
         LoginService.postLogin(this.state.email,this.state.password).then(res=>{
             AsyncStorage.setItem('USERDATA',JSON.stringify(res))
+            this.setState({loading:false})
             this.props.navigation.navigate('Home')
-        })
+        }).catch(err=>{
+            this.setState({loading:false})
+            alert("Unmatched email and password")}
+        )
     }
 
     componentDidMount(){
@@ -41,6 +46,8 @@ class Login extends Component {
             if(res.token){
                 this.setState({loading:'false'})
                 this.props.navigation.navigate('Home')
+            }else{
+                this.setState({loading:false})
             }
         }).catch(err=>{
             this.setState({loading:false})
@@ -51,7 +58,10 @@ class Login extends Component {
 
     render() {
         return (
-           !this.state.loading && <ImageBackground style={{flex:1,resizeMode:'contain '}} source={require('./../../../assets/dhan.jpg')}>
+           this.state.loading && <View style={styles.loaderContainer}>
+           <ActivityIndicator style={styles.loader} size="large" color="#0000ff" />
+            </View> ||
+        <ImageBackground style={{flex:1,resizeMode:'contain '}} source={require('./../../../assets/dhan.png')}>
                 <ScrollView contentContainerStyle={{flex:1,height:'100%',width:'100%',backgroundColor:'rgba(255,255,255,0.4)',padding:20,paddingTop:'40%'}}
                     keyboardShouldPersistTaps="handled"
                 >
@@ -88,9 +98,7 @@ class Login extends Component {
                     <Text style={styles.text} >Login</Text>
                 </TouchableOpacity>
                 </ScrollView>
-           </ImageBackground> || <View style={styles.loaderContainer}>
-                    <ActivityIndicator style={styles.loader} size="large" color="#0000ff" />
-                </View>
+           </ImageBackground>
         );
     }
 }
@@ -113,7 +121,7 @@ const styles = StyleSheet.create({
     loaderContainer:{
         flex: 1,
         zIndex: 1111,
-        backgroundColor: '#ffffff85',
+        backgroundColor: 'rgba(255,255,255,0.4)',
         position: 'absolute',
         top: 0,
         right: 0,

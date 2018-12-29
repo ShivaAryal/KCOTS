@@ -97,6 +97,10 @@ class Expense extends Component {
 
     render() {
         const state = this.state;
+        let d = new Date();
+        d.setDate(d.getDate() - 15);
+        let a = new Date();
+        a.setDate(a.getDate()+15)
         return (
            <View style={styles.container}>
                 <Header title="This Month Expense" navigation={this.props.navigation}/>
@@ -153,6 +157,8 @@ class Expense extends Component {
                             mode="date"
                             placeholder={<Text style={{fontSize:17,alignSelf:'flex-start',left:0,paddingLeft:0,color:'#757575'}}>Date</Text>}
                             format="YYYY-MM-DD"
+                            minDate={d}
+                            maxDate={a}
                             confirmBtnText="Confirm"
                             cancelBtnText="Cancel"
                             onDateChange={(date) => {this.setState({date: date})}}

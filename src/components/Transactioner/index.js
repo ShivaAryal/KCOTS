@@ -96,7 +96,7 @@ class Transactioner extends Component {
                   transparent={true}
                   onRequestClose={()=>this.setState({visible:false})}
                   visible={this.state.visible}>
-                <ScrollView style={styles.modalBackground} keyboardShouldPersistTaps='handled'>
+                <ScrollView contentContainerStyle={styles.modalBackground} keyboardShouldPersistTaps='handled'>
                     <View style={{backgroundColor:'#fff',padding:10,borderRadius:10}}>
                         <View style={{flexDirection:'row',justifyContent:'space-between'}}> 
                             <Text style={{fontSize:20,marginLeft:10,marginVertical:5}}>Add Transactioner</Text>
