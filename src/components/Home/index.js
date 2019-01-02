@@ -134,24 +134,24 @@ class Home extends Component {
                 </View>
               </View>
               {/* graph view */}
-              <View>
-              <View style={{marginTop:20,alignSelf:'center'}} >
+              <View style={{paddingHorizontal:10}}>
+              <ScrollView style={{marginTop:20,alignSelf:'center'}} horizontal={true} >
                 <PureChart 
                     data={this.state.monthlyData}
                     type='line' 
                     height={200} 
                     width={'100%'} 
                     showEvenNumberXaxisLabel={false}/>
-                </View>
+                </ScrollView>
                 <Text style={{marginLeft:20}}>Monthly Sales</Text>
-                <View style={{marginTop:30,alignSelf:'center'}} >
+                <ScrollView style={{marginTop:30,alignSelf:'center'}} horizontal={true} >
                 <PureChart 
                     data={this.state.profitData}
                     type='line' 
                     height={200} 
                     width={'100%'} 
                     showEvenNumberXaxisLabel={false}/>
-                </View>
+                </ScrollView>
                 <Text style={{marginLeft:20}}>Monthly Profits</Text>
                 </View>
                 <View style={[styles.salesView,{marginHorizontal:20,marginVertical:20}]}>

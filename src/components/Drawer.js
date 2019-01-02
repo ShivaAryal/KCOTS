@@ -65,6 +65,13 @@ class Drawer extends Component {
                 <Divider style={{marginHorizontal:10}}/>
                 <List.Item
                     style={styles.item}
+                    title={<Text>Settings</Text>}
+                    left={() => <List.Icon icon="settings" color="#1B5E20" style={{marginLeft:0,marginRight:0}}/>}
+                    onPress={()=>navigate('Settings')}
+                />
+                <Divider style={{marginHorizontal:10}}/>
+                <List.Item
+                    style={styles.item}
                     title={<Text>Log out</Text>}
                     left={() => <List.Icon icon="exit-to-app" color="#d50000" style={{marginLeft:0,marginRight:0}}/>}
                     onPress={()=>this.onLogOutPress()}

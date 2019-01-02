@@ -14,7 +14,7 @@ class Chamal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tableHead: ['S.N.', 'Customer', 'Unit Packet Price', 'No. of Packets','Date','Total'],
+            tableHead: ['S.N.', 'Customer', 'Unit Price(/kg)', 'Total Quantity(kg)','Date','Total'],
             tableData: [],
             visible:false,
             filterMode:'Customer',
@@ -57,7 +57,7 @@ class Chamal extends Component {
 
     isValid(){
         const state= this.state;
-        if(state.customer && state.unitPrice && state.noofPackets && state.date) return true;
+        if(state.customer && state.totalAmount && state.noofPackets && state.date) return true;
         else return false;
     }
 
@@ -65,7 +65,7 @@ class Chamal extends Component {
         Keyboard.dismiss();
         this.setState({loading:true,visible:false})
         const state = this.state;
-        SalesService.postChamalSales(this.state.token,state.customer,state.unitPrice,state.noofPackets,state.date).then(res=>{
+        SalesService.postChamalSales(this.state.token,state.customer,state.totalAmount/state.noofPackets,state.noofPackets,state.date).then(res=>{
             alert("successfully submitted")
             SalesService.getChamalSales(this.state.token).then(res=>{
                 let tableData = [];
@@ -79,6 +79,7 @@ class Chamal extends Component {
                 unitPrice:'',
                 noofPackets:'',
                 date:'',
+                totalAmount:'',
                 loading:false
             })
         }).catch(err=>{
@@ -145,18 +146,19 @@ class Chamal extends Component {
                         <KeyboardAvoidingView style={{marginBottom:10}}>
                             <TextInput style={styles.textInput}
                                 theme={{ colors: { primary: "#FF5722" }}}
-                                value={this.state.unitPrice}
+                                // value={this.state.unitPrice}
+                                value={this.state.totalAmount}
                                 keyboardType="numeric"
-                                label="Unit Packet Price"
+                                label="Total Amount"
                                 underlineColor='#FF5722'
-                                onChangeText={(text)=>this.setState({unitPrice:text})} 
+                                onChangeText={(text)=>this.setState({totalAmount:text})} 
                                 />
                         </KeyboardAvoidingView>
                         <KeyboardAvoidingView style={{marginBottom:10}}>
                             <TextInput style={styles.textInput}
                                 theme={{ colors: { primary: "#FF5722" }}}
                                 value={this.state.noofPackets}
-                                label="No. of Packets"
+                                label="Total Quantity"
                                 keyboardType="numeric"
                                 underlineColor='#FF5722'
                                 onChangeText={(text)=>this.setState({noofPackets:text})} 

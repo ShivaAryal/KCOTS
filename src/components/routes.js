@@ -8,6 +8,7 @@ import Stock from './Stock';
 import Expense from './Expense';
 import Drawer from './Drawer';
 import Login from './Login';
+import Settings from './Settings';
 import { Constants } from 'expo';
 const AppNavigator = createDrawerNavigator({
     Login:{screen:Login},
@@ -16,7 +17,8 @@ const AppNavigator = createDrawerNavigator({
     Transactioner:{screen:Transactioner},
     Stock:{screen:Stock},
     Expense:{screen:Expense},
-    Drawer:{screen:Drawer}
+    Drawer:{screen:Drawer},
+    Settings:{screen:Settings}
   },{
       initialRouteName:'Login',
       headerMode:'none',
