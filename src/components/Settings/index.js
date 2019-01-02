@@ -5,6 +5,11 @@ import Header from './../Header';
 import {getToken} from './../../utils';
 
 class Settings extends Component {
+    static navigationOptions = {
+        drawerLabel: () => null,
+        drawerLockMode:'unlocked'
+    }
+    
     constructor(props) {
         super(props);
         this.state = {
