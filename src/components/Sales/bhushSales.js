@@ -11,7 +11,7 @@ class Bhush extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tableHead: ['S.N.', 'Customer', 'Unit Packet Price', 'No. of Packets','Date','Total'],
+            tableHead: ['S.N.', 'Customer', 'Unit Price(/kg)', 'Total Quantity(kg)','Date','Total'],
             tableData: [],
             visible:false,
             filterMode:'Customer',
@@ -54,7 +54,7 @@ class Bhush extends Component {
 
     isValid(){
         const state= this.state;
-        if(state.customer && state.unitPrice && state.noofPackets ) return true;
+        if(state.customer && state.totalAmount && state.noofPackets ) return true;
         else return false;
     }
 
@@ -62,7 +62,7 @@ class Bhush extends Component {
         this.setState({loading:true,visible:false})
         Keyboard.dismiss();
         const state = this.state;
-        SalesService.postBhushSales(state.token,state.customer,state.unitPrice,state.noofPackets,state.date).then(res=>{
+        SalesService.postBhushSales(state.token,state.customer,state.totalAmount/state.noofPackets,state.noofPackets,state.date).then(res=>{
             alert("successfully submitted")
             SalesService.getBhushSales(this.state.token).then(res=>{
                 let tableData =[]
@@ -75,6 +75,7 @@ class Bhush extends Component {
                 customer:'',
                 unitPrice:'',
                 noofPackets:'',
+                totalAmount:'',
                 date:'',
                 loading:false
             })
@@ -140,18 +141,18 @@ class Bhush extends Component {
                         <KeyboardAvoidingView style={{marginBottom:10}}>
                             <TextInput style={styles.textInput}
                                 theme={{ colors: { primary: "#FF5722" }}}
-                                value={this.state.unitPrice}
-                                label="Unit Packet Price"
+                                value={this.state.totalAmount}
+                                label="Total Amount"
                                 keyboardType="numeric"
                                 underlineColor='#FF5722'
-                                onChangeText={(text)=>this.setState({unitPrice:text})} 
+                                onChangeText={(text)=>this.setState({totalAmount:text})} 
                                 />
                         </KeyboardAvoidingView>
                         <KeyboardAvoidingView style={{marginBottom:10}}>
                             <TextInput style={styles.textInput}
                                 theme={{ colors: { primary: "#FF5722" }}}
                                 value={this.state.noofPackets}
-                                label="No. of Packets"
+                                label="Total Quantity"
                                 keyboardType="numeric"
                                 underlineColor='#FF5722'
                                 onChangeText={(text)=>this.setState({noofPackets:text})} 
