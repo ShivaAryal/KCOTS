@@ -15,9 +15,9 @@ class Drawer extends Component {
     }
 
     onSignOut=()=>{
-        AsyncStorage.setItem('USERDATA','')
         this.setState({logOutVisible:false})
-        this.props.navigation.navigate('Login')
+        AsyncStorage.removeItem('USERDATA')
+        this.props.navigation.navigate('Login',{signOut:true})
     }
 
     render() {
@@ -40,6 +40,27 @@ class Drawer extends Component {
                     title={<Text>Sales</Text>}
                     left={() => <List.Icon icon="attach-money" color="#4CAF50" style={{marginLeft:0,marginRight:0}}/>}
                     onPress={()=>navigate('Sales',{props:'props'})}
+                />
+                <Divider style={{marginHorizontal:10}}/>
+                <List.Item
+                    style={styles.item}
+                    title={<Text>Purchases</Text>}
+                    left={() => <List.Icon icon="money-off" color="#d50000" style={{marginLeft:0,marginRight:0}}/>}
+                    onPress={()=>navigate('Purchases',{props:'props'})}
+                />
+                <Divider style={{marginHorizontal:10}}/>
+                <List.Item
+                    style={styles.item}
+                    title={<Text>Monthly Sales</Text>}
+                    left={() => <List.Icon icon="wrap-text" color="#FF6F00" style={{marginLeft:0,marginRight:0}}/>}
+                    onPress={()=>navigate('MonthlySales',{props:'props'})}
+                />
+                <Divider style={{marginHorizontal:10}}/>
+                <List.Item
+                    style={styles.item}
+                    title={<Text>Monthly Purchase</Text>}
+                    left={() => <List.Icon icon="money-off" color="#76FF03" style={{marginLeft:0,marginRight:0}}/>}
+                    onPress={()=>navigate('MonthlyPurchases',{props:'props'})}
                 />
                 <Divider style={{marginHorizontal:10}}/>
                 <List.Item

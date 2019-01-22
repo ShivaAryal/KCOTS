@@ -1,10 +1,10 @@
 // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjMTY4NGU3ODQ4NGFlMjg1Y2I0MjAxZSIsImlhdCI6MTU0NDk3OTgxMH0.kyAOrnMq6if_p24F4_OoNAdmUHq8Ll48oqzKGqnxxmI"
-const IP = '192.168.1.72'
+import {URL} from './../../constants';
 
 export default class HomeService{
     static getMonthlySalesData(token){
         return new Promise((resolve,reject)=>{
-            fetch(`https://rice-factory-stock-management.herokuapp.com/api/sales/monthlySales`,{
+            fetch(`${URL}/api/sales/monthlySales`,{
                 method:'GET',
                 headers:{
                     'Authorization':token

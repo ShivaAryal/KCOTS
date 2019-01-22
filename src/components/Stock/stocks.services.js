@@ -1,10 +1,10 @@
 // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjMTY4NGU3ODQ4NGFlMjg1Y2I0MjAxZSIsImlhdCI6MTU0NDk3OTgxMH0.kyAOrnMq6if_p24F4_OoNAdmUHq8Ll48oqzKGqnxxmI"
-const IP = '192.168.1.72'
+import {URL} from './../../constants';
 
 export default class StockService{
     static getDhanStock(token){
         return new Promise((resolve,reject)=>{
-            fetch(`https://rice-factory-stock-management.herokuapp.com/api/stock/dhanStock`,{
+            fetch(`${URL}/api/stock/dhanStock`,{
                 method:'GET',
                 headers:{
                     'Authorization':token
@@ -18,9 +18,9 @@ export default class StockService{
             }).catch(err=>reject(err))
         })
     }
-    static postDhanStock(token,good,unitPacketPrice,noofPackets){
+    static postDhanStock(token,good,unitPacketPrice,noofPackets,date){
         return new Promise((resolve,reject)=>{
-        fetch(`https://rice-factory-stock-management.herokuapp.com/api/stock/dhanStock`,{
+        fetch(`${URL}/api/stock/dhanStock`,{
             method:'POST',
             headers:{
                 'Accept':'application/json',
@@ -30,7 +30,8 @@ export default class StockService{
             body:JSON.stringify({
                 good:good,
                 unitPrice:parseInt(unitPacketPrice),
-                noofPackets:parseInt(noofPackets)
+                noofPackets:parseInt(noofPackets),
+                date:date
             })
         }).then(res=>res.json()).then(info=>{
             if(info.status=='success'){
@@ -43,7 +44,7 @@ export default class StockService{
 }
 static getChamalStock(token){
     return new Promise((resolve,reject)=>{
-        fetch(`https://rice-factory-stock-management.herokuapp.com/api/stock/chamalStock`,{
+        fetch(`${URL}/api/stock/chamalStock`,{
             method:'GET',
             headers:{
                 'Authorization':token
@@ -59,7 +60,7 @@ static getChamalStock(token){
 }
 static postChamalStock(token,good,unitPacketPrice,noofPackets){
     return new Promise((resolve,reject)=>{
-    fetch(`https://rice-factory-stock-management.herokuapp.com/api/stock/chamalStock`,{
+    fetch(`${URL}/api/stock/chamalStock`,{
         method:'POST',
         headers:{
             'Accept':'application/json',
@@ -69,7 +70,8 @@ static postChamalStock(token,good,unitPacketPrice,noofPackets){
         body:JSON.stringify({
             good:good,
             unitPrice:parseInt(unitPacketPrice),
-            noofPackets:parseInt(noofPackets)
+            noofPackets:parseInt(noofPackets),
+            date:date
         })
     }).then(res=>res.json()).then(info=>{
         if(info.status=='success'){
@@ -82,7 +84,7 @@ static postChamalStock(token,good,unitPacketPrice,noofPackets){
 }
 static getBranStock(token){
     return new Promise((resolve,reject)=>{
-        fetch(`https://rice-factory-stock-management.herokuapp.com/api/stock/branStock`,{
+        fetch(`${URL}/api/stock/branStock`,{
             method:'GET',
             headers:{
                 'Authorization':token
@@ -98,7 +100,7 @@ static getBranStock(token){
 }
 static postBranStock(token,good,unitPacketPrice,noofPackets){
     return new Promise((resolve,reject)=>{
-    fetch(`https://rice-factory-stock-management.herokuapp.com/stock/branStock`,{
+    fetch(`${URL}/stock/branStock`,{
         method:'POST',
         headers:{
             'Accept':'application/json',
@@ -108,7 +110,8 @@ static postBranStock(token,good,unitPacketPrice,noofPackets){
         body:JSON.stringify({
             good:good,
             unitPrice:parseInt(unitPacketPrice),
-            noofPackets:parseInt(noofPackets)
+            noofPackets:parseInt(noofPackets),
+            date:date
         })
     }).then(res=>res.json()).then(info=>{
         if(info.status=='success'){
@@ -121,7 +124,7 @@ static postBranStock(token,good,unitPacketPrice,noofPackets){
 }
 static getBhushStock(token){
     return new Promise((resolve,reject)=>{
-        fetch(`https://rice-factory-stock-management.herokuapp.com/api/stock/bhushStock`,{
+        fetch(`${URL}/api/stock/bhushStock`,{
             method:'GET',
             headers:{
                 'Authorization':token
@@ -137,7 +140,7 @@ static getBhushStock(token){
 }
 static postBhushStock(token,good,unitPacketPrice,noofPackets){
     return new Promise((resolve,reject)=>{
-    fetch(`https://rice-factory-stock-management.herokuapp.com/api/stock/bhushStock`,{
+    fetch(`${URL}/api/stock/bhushStock`,{
         method:'POST',
         headers:{
             'Accept':'application/json',
@@ -147,7 +150,8 @@ static postBhushStock(token,good,unitPacketPrice,noofPackets){
         body:JSON.stringify({
             good:good,
             unitPrice:parseInt(unitPacketPrice),
-            noofPackets:parseInt(noofPackets)
+            noofPackets:parseInt(noofPackets),
+            date:date
         })
     }).then(res=>res.json()).then(info=>{
         if(info.status=='success'){
@@ -160,7 +164,7 @@ static postBhushStock(token,good,unitPacketPrice,noofPackets){
 }
 static getKanikaStock(token){
     return new Promise((resolve,reject)=>{
-        fetch(`https://rice-factory-stock-management.herokuapp.com/api/stock/kanikaStock`,{
+        fetch(`${URL}/api/stock/kanikaStock`,{
             method:'GET',
             headers:{
                 'Authorization':token
@@ -176,7 +180,7 @@ static getKanikaStock(token){
 }
 static postKanikaStock(token,good,unitPacketPrice,noofPackets){
     return new Promise((resolve,reject)=>{
-    fetch(`https://rice-factory-stock-management.herokuapp.com/api/stock/kanikaStock`,{
+    fetch(`${URL}/api/stock/kanikaStock`,{
         method:'POST',
         headers:{
             'Accept':'application/json',
@@ -186,7 +190,8 @@ static postKanikaStock(token,good,unitPacketPrice,noofPackets){
         body:JSON.stringify({
             good:good,
             unitPrice:parseInt(unitPacketPrice),
-            noofPackets:parseInt(noofPackets)
+            noofPackets:parseInt(noofPackets),
+            date:date
         })
     }).then(res=>res.json()).then(info=>{
         if(info.status=='success'){

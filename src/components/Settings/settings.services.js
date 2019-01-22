@@ -1,7 +1,8 @@
+import {URL} from './../../constants';
 export default class SettingService{
     static changePassword(oldPassword,newPassword,token){
         return new Promise((resolve,reject)=>{
-            fetch('https://rice-factory-stock-management.herokuapp.com/api/admin/editPassword',{
+            fetch(`${URL}/api/admin/editPassword`,{
                 method:'POST',
                 headers:{
                     'Accept':'application/json',

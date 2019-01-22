@@ -8,7 +8,8 @@ class Login extends Component {
         super(props);
         this.state = { 
             email:'',
-            password:''
+            password:'',
+            signOut:false
          };
     }
 
@@ -27,7 +28,7 @@ class Login extends Component {
         this.setState({password:password})
     }
 
-    onLoginPress(){
+    onLoginPress=()=>{
         this.setState({loading:true})
         LoginService.postLogin(this.state.email,this.state.password).then(res=>{
             AsyncStorage.setItem('USERDATA',JSON.stringify(res))
@@ -42,10 +43,14 @@ class Login extends Component {
     componentDidMount(){
         this.setState({loading:'true'})
         AsyncStorage.getItem('USERDATA').then(res=>{
-            res= JSON.parse(res)
-            if(res.token){
-                this.setState({loading:'false'})
-                this.props.navigation.navigate('Home')
+            if(res){
+                res= JSON.parse(res)
+                if(res.token){
+                    this.setState({loading:'false'})
+                    this.props.navigation.navigate('Home')
+                }else{
+                    this.setState({loading:false})
+                }
             }else{
                 this.setState({loading:false})
             }
@@ -56,12 +61,16 @@ class Login extends Component {
         this.setState({loading:false})
     }
 
+    componentWillReceiveProps(){
+        this.setState({signOut:true,loading:false})
+    }
+
     render() {
         return (
-           this.state.loading && <View style={styles.loaderContainer}>
-           <ActivityIndicator style={styles.loader} size="large" color="#0000ff" />
-            </View> ||
         <ImageBackground style={{flex:1,resizeMode:'contain '}} source={require('./../../../assets/dhan.png')}>
+                {this.state.loading && <View style={styles.loaderContainer}>
+                <ActivityIndicator style={styles.loader} size="large" color="#0000ff" />
+                </View> ||
                 <ScrollView contentContainerStyle={{flex:1,height:'100%',width:'100%',backgroundColor:'rgba(255,255,255,0.4)',padding:20,paddingTop:'40%'}}
                     keyboardShouldPersistTaps="handled"
                 >
@@ -97,7 +106,7 @@ class Login extends Component {
                 >
                     <Text style={styles.text} >Login</Text>
                 </TouchableOpacity>
-                </ScrollView>
+                </ScrollView>}
            </ImageBackground>
         );
     }

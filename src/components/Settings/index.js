@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View,ScrollView,TouchableOpacity,Text,Modal,KeyboardAvoidingView,StyleSheet } from 'react-native';
 import { IconButton,TextInput,FAB,Divider} from 'react-native-paper';
 import Header from './../Header';
+import SettingService from './settings.services'
 import {getToken} from './../../utils';
 
 class Settings extends Component {
@@ -34,10 +35,13 @@ class Settings extends Component {
         if(newPassword==confirmPassword){
             SettingService.changePassword(oldPassword,newPassword,token).then(res=>{
                 alert('Successfully changed')
+                this.setState({passwordVisible:false,oldPassword:'',newPassword:'',confirmPassword:''})
             }).catch(err=>{
+                this.setState({passwordVisible:false,oldPassword:'',newPassword:'',confirmPassword:''})
                 alert("Password change can't be completed")
             })
         }else{
+            this.setState({passwordVisible:false,oldPassword:'',newPassword:'',confirmPassword:''})
             alert('New Password Unmatched')
         }
     }
@@ -85,6 +89,7 @@ class Settings extends Component {
                                     theme={{ colors: { primary: "#FF5722" }}}
                                     value={this.state.oldPassword}
                                     label="Old Password"
+                                    autoCapitalize="none"
                                     underlineColor='#FF5722'
                                     onChangeText={(text)=>this.setState({oldPassword:text})} 
                                     />
@@ -95,6 +100,7 @@ class Settings extends Component {
                                     secureTextEntry={true}
                                     value={this.state.newPassword}
                                     label="New Password"
+                                    autoCapitalize="none"
                                     underlineColor='#FF5722'
                                     onChangeText={(text)=>this.setState({newPassword:text})} 
                                     />
@@ -103,6 +109,7 @@ class Settings extends Component {
                                 <TextInput style={styles.textInput}
                                     theme={{ colors: { primary: "#FF5722" }}}
                                     secureTextEntry={true}
+                                    autoCapitalize="none"
                                     value={this.state.confirmPassword}
                                     label="Confirm New Password"
                                     underlineColor='#FF5722'

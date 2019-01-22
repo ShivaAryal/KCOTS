@@ -1,9 +1,9 @@
 // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjMTY4NGU3ODQ4NGFlMjg1Y2I0MjAxZSIsImlhdCI6MTU0NDk3OTgxMH0.kyAOrnMq6if_p24F4_OoNAdmUHq8Ll48oqzKGqnxxmI"
-const IP = '192.168.1.72'
+import {URL} from './../../constants';
 export default class SalesService{
     static postChamalSales(token,customer,unitPrice,noofPackets,date){
         return new Promise((resolve,reject)=>{
-            fetch(`https://rice-factory-stock-management.herokuapp.com/api/sales/chamalSales`,{
+            fetch(`${URL}/api/sales/chamalSales`,{
                 method:'POST',
                 headers:{
                     'Accept':'application/json',
@@ -28,7 +28,7 @@ export default class SalesService{
 
     static getChamalSales(token){
         return new Promise((resolve,reject)=>{
-            fetch(`https://rice-factory-stock-management.herokuapp.com/api/sales/chamalSales`,{
+            fetch(`${URL}/api/sales/chamalSales`,{
                 method:'GET',
                 headers:{
                     'Authorization':token
@@ -43,9 +43,57 @@ export default class SalesService{
         })
     }
 
+    static editChamalSale(token,id,customer,unitPrice,noofPackets,date){
+        return new Promise((resolve,reject)=>{
+            fetch(`${URL}/api/sales/editChamalSale`,{
+                method:'POST',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json',
+                    'Authorization':token
+                },
+                body:JSON.stringify({
+                    id:id,
+                    customer:customer,
+                    unitPrice:unitPrice,
+                    noofPackets:noofPackets,
+                    date:date
+                })
+            }).then(res=>res.json()).then(info=>{
+                if(info.status=='success'){
+                    resolve(info.data)
+                }else{
+                    reject(info.message)
+                }
+            }).catch(err=>reject(err))
+        })
+    }
+
+    static deleteChamalSale(token,id){
+        return new Promise((resolve,reject)=>{
+            fetch(`${URL}/api/sales/deleteChamalSale`,{
+                method:'POST',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json',
+                    'Authorization':token
+                },
+                body:JSON.stringify({
+                    id:id,
+                })
+            }).then(res=>res.json()).then(info=>{
+                if(info.status=='success'){
+                    resolve(info.data)
+                }else{
+                    reject(info.message)
+                }
+            }).catch(err=>reject(err))
+        })
+    }
+
     static postKanikaSales(token,customer,unitPrice,noofPackets,date){
         return new Promise((resolve,reject)=>{
-            fetch(`https://rice-factory-stock-management.herokuapp.com/api/sales/kanikaSales`,{
+            fetch(`${URL}/api/sales/kanikaSales`,{
                 method:'POST',
                 headers:{
                     'Accept':'application/json',
@@ -70,7 +118,7 @@ export default class SalesService{
 
     static getKanikaSales(token){
         return new Promise((resolve,reject)=>{
-            fetch(`https://rice-factory-stock-management.herokuapp.com/api/sales/kanikaSales`,{
+            fetch(`${URL}/api/sales/kanikaSales`,{
                 method:'GET',
                 headers:{
                     'Authorization':token
@@ -85,10 +133,57 @@ export default class SalesService{
         })
     }
 
+    static editKanikaSale(token,id,customer,unitPrice,noofPackets,date){
+        return new Promise((resolve,reject)=>{
+            fetch(`${URL}/api/sales/editKanikaSale`,{
+                method:'POST',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json',
+                    'Authorization':token
+                },
+                body:JSON.stringify({
+                    id:id,
+                    customer:customer,
+                    unitPrice:unitPrice,
+                    noofPackets:noofPackets,
+                    date:date
+                })
+            }).then(res=>res.json()).then(info=>{
+                if(info.status=='success'){
+                    resolve(info.data)
+                }else{
+                    reject(info.message)
+                }
+            }).catch(err=>reject(err))
+        })
+    }
+
+    static deleteKanikaSale(token,id){
+        return new Promise((resolve,reject)=>{
+            fetch(`${URL}/api/sales/deleteKanikaSale`,{
+                method:'POST',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json',
+                    'Authorization':token
+                },
+                body:JSON.stringify({
+                    id:id,
+                })
+            }).then(res=>res.json()).then(info=>{
+                if(info.status=='success'){
+                    resolve(info.data)
+                }else{
+                    reject(info.message)
+                }
+            }).catch(err=>reject(err))
+        })
+    }
 
     static postBhushSales(token,customer,unitPrice,noofPackets,date){
         return new Promise((resolve,reject)=>{
-            fetch(`https://rice-factory-stock-management.herokuapp.com/api/sales/bhushSales`,{
+            fetch(`${URL}/api/sales/bhushSales`,{
                 method:'POST',
                 headers:{
                     'Accept':'application/json',
@@ -113,7 +208,7 @@ export default class SalesService{
 
     static getBhushSales(token){
         return new Promise((resolve,reject)=>{
-            fetch(`https://rice-factory-stock-management.herokuapp.com/api/sales/bhushSales`,{
+            fetch(`${URL}/api/sales/bhushSales`,{
                 method:'GET',
                 headers:{
                     'Authorization':token
@@ -128,11 +223,58 @@ export default class SalesService{
         })
     }
 
+    static editBhushSale(token,id,customer,unitPrice,noofPackets,date){
+        console.warn("id",id)
+        return new Promise((resolve,reject)=>{
+            fetch(`${URL}/api/sales/editBhushSale`,{
+                method:'POST',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json',
+                    'Authorization':token
+                },
+                body:JSON.stringify({
+                    id:id,
+                    customer:customer,
+                    unitPrice:unitPrice,
+                    noofPackets:noofPackets,
+                    date:date
+                })
+            }).then(res=>res.json()).then(info=>{
+                if(info.status=='success'){
+                    resolve(info.data)
+                }else{
+                    reject(info.message)
+                }
+            }).catch(err=>reject(err))
+        })
+    }
 
+    static deleteBhushSale(token,id){
+        return new Promise((resolve,reject)=>{
+            fetch(`${URL}/api/sales/deleteBhushSale`,{
+                method:'POST',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json',
+                    'Authorization':token
+                },
+                body:JSON.stringify({
+                    id:id,
+                })
+            }).then(res=>res.json()).then(info=>{
+                if(info.status=='success'){
+                    resolve(info.data)
+                }else{
+                    reject(info.message)
+                }
+            }).catch(err=>reject(err))
+        })
+    }
 
     static postBranSales(token,customer,unitPrice,noofPackets,date){
         return new Promise((resolve,reject)=>{
-            fetch(`https://rice-factory-stock-management.herokuapp.com/api/sales/branSales`,{
+            fetch(`${URL}/api/sales/branSales`,{
                 method:'POST',
                 headers:{
                     'Accept':'application/json',
@@ -157,7 +299,7 @@ export default class SalesService{
 
     static getBranSales(token){
         return new Promise((resolve,reject)=>{
-            fetch(`https://rice-factory-stock-management.herokuapp.com/api/sales/branSales`,{
+            fetch(`${URL}/api/sales/branSales`,{
                 method:'GET',
                 headers:{
                     'Authorization':token
@@ -172,5 +314,52 @@ export default class SalesService{
         })
     }
 
+    static editBranSale(token,id,customer,unitPrice,noofPackets,date){
+        return new Promise((resolve,reject)=>{
+            fetch(`${URL}/api/sales/editBranSale`,{
+                method:'POST',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json',
+                    'Authorization':token
+                },
+                body:JSON.stringify({
+                    id:id,
+                    customer:customer,
+                    unitPrice:unitPrice,
+                    noofPackets:noofPackets,
+                    date:date
+                })
+            }).then(res=>res.json()).then(info=>{
+                if(info.status=='success'){
+                    resolve(info.data)
+                }else{
+                    reject(info.message)
+                }
+            }).catch(err=>reject(err))
+        })
+    }
+
+    static deleteBranSale(token,id){
+        return new Promise((resolve,reject)=>{
+            fetch(`${URL}/api/sales/deleteBranSale`,{
+                method:'POST',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json',
+                    'Authorization':token
+                },
+                body:JSON.stringify({
+                    id:id,
+                })
+            }).then(res=>res.json()).then(info=>{
+                if(info.status=='success'){
+                    resolve(info.data)
+                }else{
+                    reject(info.message)
+                }
+            }).catch(err=>reject(err))
+        })
+    }
 
 }

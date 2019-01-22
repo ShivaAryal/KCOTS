@@ -38,7 +38,7 @@ class Home extends Component {
             let profitData = []
             res.map(monthSale=>{
                 if(currentMonth+1==monthSale.month){
-                    this.setState({currentMonthSale:monthSale.total,currentMonthProfit:monthSale.profit})
+                    this.setState({currentMonthSale:monthSale.total,currentMonthProfit:Math.round(monthSale.profit*100)/100})
                 }
                 graphData.push({"x":months[parseInt(monthSale.month)],"y":parseInt(monthSale.total)})
                 profitData.push({"x":months[parseInt(monthSale.month)],"y":parseInt(monthSale.profit)})
@@ -61,7 +61,7 @@ class Home extends Component {
                 let profitData = []
                 res.map(monthSale=>{
                     if(parseInt(currentMonth+1)==parseInt(monthSale.month)){
-                        this.setState({currentMonthSale:monthSale.total,currentMonthProfit:monthSale.profit})
+                        this.setState({currentMonthSale:monthSale.total,currentMonthProfit:Math.round(monthSale.profit*100)/100})
                     }
                     graphData.push({"x":months[parseInt(monthSale.month)],"y":parseInt(monthSale.total)})
                     profitData.push({"x":months[parseInt(monthSale.month)],"y":parseInt(monthSale.profit)})
@@ -72,35 +72,6 @@ class Home extends Component {
                 alert("mot found")
             })
         })
-        // HomeService.getMonthlyExpenseData().then(res=>{
-        //     let expenseData = []
-        //     res.map(monthExpense=>{
-        //         if(parseInt(currentMonth)==parseInt(monthExpense.month)){
-        //             this.setState({currentMonthExpense:monthExpense.total})
-        //         }
-        //         expenseData.push({"x":months[parseInt(monthExpense.month)],"y":parseInt(monthExpense.total)})
-        //     })
-        //     this.setState({monthlyExpense:expenseData,loading:false})
-        // }).catch(err=>{
-        //     this.setState({loading:false})
-        //     alert("not found")
-        // })
-        // let profitArr = []
-        // if(this.state.monthlyData.length>this.state.monthlyExpense.length){
-        //     this.state.monthlyData.map((data,i)=>{
-        //         profitArr.push({month:data.month,profit:data.profit-expenseData[i].total})
-        //     })
-        // }else{
-        //     this.state.monthlyData.map((data,i)=>{
-        //         profitArr.push({month:data.month,profit:(-1)*(expenseData[i].total-data.profit)})
-        //     })
-        // }
-        // this.setState({profitData:profitArr})
-        // this.state.profitArr.map(profit=>{
-        //     if(profit.month==currentMonth){
-        //         this.setState({currentMonthProfit:profit.total})
-        //     }
-        // })
     }
 
     render() {
@@ -154,7 +125,7 @@ class Home extends Component {
                 </ScrollView>
                 <Text style={{marginLeft:20}}>Monthly Profits</Text>
                 </View>
-                <View style={[styles.salesView,{marginHorizontal:20,marginVertical:20}]}>
+                {/* <View style={[styles.salesView,{marginHorizontal:20,marginVertical:20}]}>
                 <View style={[styles.salesIView,{width:Dimensions.get('window').width/2-10}]}>
                     <Text style={{alignSelf:'center'}}>30000 rs</Text>
                     <Text style={{alignSelf:'center'}}>Predicted Next Month Sale</Text>
@@ -163,7 +134,7 @@ class Home extends Component {
                     <Text style={{alignSelf:'center'}}>2000 rs</Text>
                     <Text style={{alignSelf:'center'}}>Predicted Next Month Profit</Text>
                 </View>
-                </View>
+                </View> */}
                 </View> ||
                 <View>
                 <View style={[styles.salesView]}>
@@ -195,7 +166,7 @@ class Home extends Component {
                       showEvenNumberXaxisLabel={false}/>
                   </View>
                   <Text style={{marginLeft:20}}>Yearly Profits</Text>
-                  <View style={[styles.salesView,{marginHorizontal:10,marginVertical:20}]}>
+                  {/* <View style={[styles.salesView,{marginHorizontal:10,marginVertical:20}]}>
                   <View style={[styles.salesIView,{width:Dimensions.get('window').width/2-10}]}>
                       <Text style={{alignSelf:'center'}}>300000 rs</Text>
                       <Text style={{alignSelf:'center'}}>Predicted Next Year Sale</Text>
@@ -204,7 +175,7 @@ class Home extends Component {
                       <Text style={{alignSelf:'center'}}>20000 rs</Text>
                       <Text style={{alignSelf:'center'}}>Predicted Next Year Profit</Text>
                   </View>
-                </View>
+                </View> */}
                   </View>
             }
               </ScrollView>}
